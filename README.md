@@ -1,6 +1,7 @@
-# About this Project
+# Titan Delphix Remote Provider
 
-Describe the project for users.
+This is a proof of concept remote provider for storing remote repositories on engines. It makes use of
+a Delphix plugin that is not generally available and is therefore not yet usable by the general public.
 
 ## Contributing
 
