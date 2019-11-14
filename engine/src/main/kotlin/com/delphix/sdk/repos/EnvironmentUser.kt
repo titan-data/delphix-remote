@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * The representation of an environment user object.
  */
-class EnvironmentUser (
-        var http: Http
+class EnvironmentUser(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/environment/user"
 
@@ -49,5 +49,4 @@ class EnvironmentUser (
     fun delete(ref: String): JSONObject {
         return http.handlePost("$root/$ref", emptyMap<String, Any?>())
     }
-
 }

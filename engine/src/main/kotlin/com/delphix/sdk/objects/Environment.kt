@@ -16,7 +16,7 @@ data class Environment(
     val logCollectionEnabled: Boolean,
     val primaryUser: String,
     val reference: String
-){
+) {
     companion object {
         @JvmStatic
         fun fromJson(node: JSONObject): Environment {

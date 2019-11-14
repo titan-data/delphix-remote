@@ -4,22 +4,25 @@
 
 package com.delphix.sdk
 
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import okhttp3.ResponseBody
+import org.json.JSONObject
 
 class Http(
-        val engineAddress: String,
-        private val debug: Boolean = false,
-        private val versionMajor: Int = 1,
-        private val versionMinor: Int = 7,
-        private val versionMicro: Int = 0,
-        private val timeout: Long = 60,
-        private val timeoutUnit: TimeUnit = TimeUnit.MINUTES
-){
+    val engineAddress: String,
+    private val debug: Boolean = false,
+    private val versionMajor: Int = 1,
+    private val versionMinor: Int = 7,
+    private val versionMicro: Int = 0,
+    private val timeout: Long = 60,
+    private val timeoutUnit: TimeUnit = TimeUnit.MINUTES
+) {
     private val sessionResource: String = "/resources/json/delphix/session"
     private var JSESSIONID: String = ""
 
@@ -76,7 +79,7 @@ class Http(
         if (debug) println(url)
         val request = Request.Builder()
                 .url("$engineAddress$url")
-                .addHeader("Cookie","JSESSIONID=$JSESSIONID")
+                .addHeader("Cookie", "JSESSIONID=$JSESSIONID")
                 .build()
         val response = call(request).asJsonObject()
         validateResponse(response)
@@ -89,7 +92,7 @@ class Http(
         val requestBody = JSONObject(data).toString().toRequestBody(json)
         val request = Request.Builder()
                 .url("$engineAddress$url")
-                .addHeader("Cookie","JSESSIONID=$JSESSIONID")
+                .addHeader("Cookie", "JSESSIONID=$JSESSIONID")
                 .post(requestBody)
                 .build()
         val response = call(request).asJsonObject()
@@ -97,11 +100,11 @@ class Http(
         return response
     }
 
-    fun handleDelete(url:String): JSONObject {
+    fun handleDelete(url: String): JSONObject {
         if (debug) println(url)
         val request = Request.Builder()
                 .url("$engineAddress$url")
-                .addHeader("Cookie","JSESSIONID=$JSESSIONID")
+                .addHeader("Cookie", "JSESSIONID=$JSESSIONID")
                 .delete()
                 .build()
         val response = call(request).asJsonObject()

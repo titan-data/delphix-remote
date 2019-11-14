@@ -6,9 +6,8 @@ package com.delphix.sdk.repos
 
 import com.delphix.sdk.Http as Http
 import com.delphix.sdk.objects.Repository as RepoObj
-import org.json.JSONObject
 
-class Repository (
+class Repository(
     var http: Http
 ) {
     val resource: String = "/resources/json/delphix/repository"
@@ -17,7 +16,7 @@ class Repository (
         var repositories = mutableListOf<RepoObj>()
         val response = http.handleGet(resource).getJSONArray("result")
         for (i in 0 until response.length()) {
-            val repository = response.getJSONObject(i);
+            val repository = response.getJSONObject(i)
             repositories.add(RepoObj.fromJson(repository))
         }
         return repositories
@@ -28,5 +27,4 @@ class Repository (
         val repository = RepoObj.fromJson(response.getJSONObject("result"))
         return repository
     }
-
 }

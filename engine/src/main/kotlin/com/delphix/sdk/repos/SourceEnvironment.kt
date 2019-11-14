@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * The generic source environment schema.
  */
-class SourceEnvironment (
-        var http: Http
+class SourceEnvironment(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/environment"
 
@@ -49,5 +49,4 @@ class SourceEnvironment (
     fun delete(ref: String): JSONObject {
         return http.handleDelete("$root/$ref")
     }
-
 }

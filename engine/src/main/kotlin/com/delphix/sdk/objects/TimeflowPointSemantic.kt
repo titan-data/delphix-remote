@@ -6,9 +6,9 @@ package com.delphix.sdk.objects
 /**
  * TimeFlow point based on a semantic reference.
  */
-open class TimeflowPointSemantic (
-    open val container: String? = null,//Reference to the container.
-    open val location: String? = null,//A semantic description of a TimeFlow location.
+open class TimeflowPointSemantic(
+    open val container: String? = null, // Reference to the container.
+    open val location: String? = null, // A semantic description of a TimeFlow location.
     override val type: String = "TimeflowPointSemantic"
 ) : TimeflowPointParameters {
     override fun toMap(): Map<String, Any?> {
@@ -19,4 +19,3 @@ open class TimeflowPointSemantic (
         )
     }
 }
-

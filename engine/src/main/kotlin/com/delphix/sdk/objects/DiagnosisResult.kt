@@ -6,10 +6,10 @@ package com.delphix.sdk.objects
 /**
  * Details from a diagnosis check that was run due to a failed operation.
  */
-open class DiagnosisResult (
-    open val failure: Boolean? = null,//True if this was a check that did not pass.
-    open val messageCode: String? = null,//Message code associated with the event.
-    open val message: String? = null,//Localized message.
+open class DiagnosisResult(
+    open val failure: Boolean? = null, // True if this was a check that did not pass.
+    open val messageCode: String? = null, // Message code associated with the event.
+    open val message: String? = null, // Localized message.
     override val type: String = "DiagnosisResult"
 ) : TypedObject {
     override fun toMap(): Map<String, Any?> {
@@ -21,4 +21,3 @@ open class DiagnosisResult (
         )
     }
 }
-

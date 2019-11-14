@@ -6,7 +6,7 @@ package com.delphix.sdk.objects
 /**
  * The parameters to use as input to sync requests.
  */
-open class SyncParameters (
+open class SyncParameters(
     override val type: String = "SyncParameters"
 ) : TypedObject {
     override fun toMap(): Map<String, Any?> {
@@ -15,4 +15,3 @@ open class SyncParameters (
         )
     }
 }
-

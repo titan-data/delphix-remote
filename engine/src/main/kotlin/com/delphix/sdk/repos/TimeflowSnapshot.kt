@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * Snapshot of a point within a TimeFlow that is used as the basis for provisioning.
  */
-class TimeflowSnapshot (
-        var http: Http
+class TimeflowSnapshot(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/snapshot"
 
@@ -42,5 +42,4 @@ class TimeflowSnapshot (
     fun delete(ref: String): JSONObject {
         return http.handlePost("$root/$ref", emptyMap<String, Any?>())
     }
-
 }

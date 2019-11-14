@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * Database group.
  */
-class Group (
-        var http: Http
+class Group(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/group"
 
@@ -49,5 +49,4 @@ class Group (
     fun delete(ref: String): JSONObject {
         return http.handlePost("$root/$ref", emptyMap<String, Any?>())
     }
-
 }

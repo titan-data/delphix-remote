@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * Represents an action, a permanent record of activity on the server.
  */
-class Action (
-        var http: Http
+class Action(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/action"
 
@@ -28,5 +28,4 @@ class Action (
     fun read(ref: String): JSONObject {
         return http.handleGet("$root/$ref")
     }
-
 }

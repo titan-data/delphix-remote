@@ -25,9 +25,9 @@ import com.delphix.sdk.repos.SourceConfig
 import com.delphix.sdk.repos.SourceEnvironment
 import com.delphix.sdk.repos.TimeflowSnapshot
 
-open class Delphix (
+open class Delphix(
     var http: Http
-){
+) {
     val loginResource: String = "/resources/json/delphix/login"
 
     fun requestLogin(username: String, password: String): Map<String, String> {
@@ -52,11 +52,11 @@ open class Delphix (
     }
 
     fun group(): Group {
-      return Group(http)
+        return Group(http)
     }
 
     fun repository(): Repository {
-      return Repository(http)
+        return Repository(http)
     }
 
     fun source(): Source {

@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * A source represents an external database instance outside the Delphix system.
  */
-class Source (
-        var http: Http
+class Source(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/source"
 

@@ -6,9 +6,9 @@ package com.delphix.sdk.objects
 /**
  * The representation of the host machine.
  */
-open class HostMachine (
-    open val memorySize: Int? = null,//The amount of RAM on the host machine.
-    open val platform: String? = null,//The platform for the host machine.
+open class HostMachine(
+    open val memorySize: Int? = null, // The amount of RAM on the host machine.
+    open val platform: String? = null, // The platform for the host machine.
     override val type: String = "HostMachine"
 ) : TypedObject {
     override fun toMap(): Map<String, Any?> {
@@ -19,4 +19,3 @@ open class HostMachine (
         )
     }
 }
-

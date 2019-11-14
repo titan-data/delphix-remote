@@ -6,9 +6,9 @@ package com.delphix.sdk.objects
 /**
  * Describes a processor available to the system.
  */
-open class CPUInfo (
-    open val cores: Int? = null,//Number of cores in the processor.
-    open val speed: Int? = null,//Speed of the processor, in hertz.
+open class CPUInfo(
+    open val cores: Int? = null, // Number of cores in the processor.
+    open val speed: Int? = null, // Speed of the processor, in hertz.
     override val type: String = "CPUInfo"
 ) : TypedObject {
     override fun toMap(): Map<String, Any?> {
@@ -19,4 +19,3 @@ open class CPUInfo (
         )
     }
 }
-

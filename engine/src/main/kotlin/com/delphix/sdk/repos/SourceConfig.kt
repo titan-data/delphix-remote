@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * The source config represents the dynamically discovered attributes of a source.
  */
-class SourceConfig (
-        var http: Http
+class SourceConfig(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/sourceconfig"
 
@@ -49,5 +49,4 @@ class SourceConfig (
     fun delete(ref: String): JSONObject {
         return http.handlePost("$root/$ref", emptyMap<String, Any?>())
     }
-
 }

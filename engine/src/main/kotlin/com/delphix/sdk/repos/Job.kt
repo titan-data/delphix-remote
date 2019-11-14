@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * Represents a job object.
  */
-class Job (
-        var http: Http
+class Job(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/job"
 
@@ -35,5 +35,4 @@ class Job (
     fun update(ref: String, payload: com.delphix.sdk.objects.Job): JSONObject {
         return http.handlePost("$root/$ref", payload.toMap())
     }
-
 }

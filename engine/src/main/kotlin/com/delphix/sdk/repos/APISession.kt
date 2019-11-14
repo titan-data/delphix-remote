@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * Describes a Delphix web service session and is the result of an initial handshake.
  */
-class APISession (
-        var http: Http
+class APISession(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/session"
 
@@ -28,5 +28,4 @@ class APISession (
     fun create(payload: com.delphix.sdk.objects.APISession): JSONObject {
         return http.handlePost("$root", payload.toMap())
     }
-
 }

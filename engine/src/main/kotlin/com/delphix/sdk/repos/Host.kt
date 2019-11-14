@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * The representation of a host object.
  */
-class Host (
-        var http: Http
+class Host(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/host"
 
@@ -35,5 +35,4 @@ class Host (
     fun update(ref: String, payload: com.delphix.sdk.objects.Host): JSONObject {
         return http.handlePost("$root/$ref", payload.toMap())
     }
-
 }

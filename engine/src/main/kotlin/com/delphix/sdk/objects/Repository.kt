@@ -17,7 +17,7 @@ data class Repository(
     val staging: Boolean,
     val toolkit: String = "",
     val version: String
-){
+) {
     companion object {
         @JvmStatic
         fun fromJson(node: JSONObject): Repository {

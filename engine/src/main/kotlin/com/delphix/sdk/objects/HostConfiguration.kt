@@ -6,12 +6,12 @@ package com.delphix.sdk.objects
 /**
  * The representation of the host configuration properties.
  */
-open class HostConfiguration (
-    open val lastRefreshed: String? = null,//The timestamp when the host was last refreshed.
-    open val lastUpdated: String? = null,//The timestamp when the host was last updated.
-    open val discovered: Boolean? = null,//Indicates whether the host configuration properties were discovered.
-    open val machine: HostMachine? = null,//The host machine information.
-    open val operatingSystem: HostOS? = null,//The host operating system information.
+open class HostConfiguration(
+    open val lastRefreshed: String? = null, // The timestamp when the host was last refreshed.
+    open val lastUpdated: String? = null, // The timestamp when the host was last updated.
+    open val discovered: Boolean? = null, // Indicates whether the host configuration properties were discovered.
+    open val machine: HostMachine? = null, // The host machine information.
+    open val operatingSystem: HostOS? = null, // The host operating system information.
     override val type: String = "HostConfiguration"
 ) : TypedObject {
     override fun toMap(): Map<String, Any?> {
@@ -25,4 +25,3 @@ open class HostConfiguration (
         )
     }
 }
-

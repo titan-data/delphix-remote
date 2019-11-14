@@ -10,8 +10,8 @@ import org.json.JSONObject
 /**
  * A container holding data.
  */
-class Container (
-        var http: Http
+class Container(
+    var http: Http
 ) {
     val root: String = "/resources/json/delphix/database"
 
