@@ -113,7 +113,7 @@ class DelphixRemoteServer : RemoteServer {
         val name = remote["repository"] as String
 
         if (!repoExists(engine, name)) {
-            throw Exception("no such repository '$name'")
+            return emptyList()
         }
 
         val ret = ArrayList<JSONObject>()
