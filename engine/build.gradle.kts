@@ -1,3 +1,7 @@
+/*
+ * Copyright The Titan Project Contributors.
+ */
+
 plugins {
     kotlin("jvm")
     `maven-publish`
