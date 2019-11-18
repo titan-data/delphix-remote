@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib"))
-    compile("io.titandata:remote-sdk:0.0.11")
+    compile("io.titandata:remote-sdk:0.1.0")
     compile("com.google.code.gson:gson:2.8.6")
     compile(project(path = ":engine", configuration = "default"))
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
