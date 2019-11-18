@@ -9,7 +9,9 @@ import com.delphix.sdk.Http
 import com.delphix.sdk.objects.AppDataContainer
 import com.delphix.sdk.objects.AppDataDirectSourceConfig
 import com.delphix.sdk.objects.AppDataProvisionParameters
+import com.delphix.sdk.objects.AppDataSyncParameters
 import com.delphix.sdk.objects.AppDataVirtualSource
+import com.delphix.sdk.objects.DeleteParameters
 import com.delphix.sdk.objects.Repository
 import com.delphix.sdk.objects.SourceDisableParameters
 import com.delphix.sdk.objects.TimeflowPointParameters
@@ -137,6 +139,7 @@ class DelphixRemoteServer : RsyncRemote() {
             val properties = snapshot.optJSONObject("metadata")
             if (properties != null && properties.has("repository") && properties.has("hash")) {
                 if (properties.getString("repository") == name && properties.getString("hash") != "") {
+                    properties.put("reference", snapshot.getString("reference"))
                     ret.add(properties)
                 }
             }
@@ -312,18 +315,40 @@ class DelphixRemoteServer : RsyncRemote() {
     }
 
     override fun endOperation(operation: RemoteOperation, isSuccessful: Boolean) {
-        throw NotImplementedError()
+        val data = operation.data as EngineOperation
+        operation.updateProgress(RemoteProgress.START, "Removing remote endpoint", null)
+        if (operation.type == RemoteOperationType.PUSH && isSuccessful) {
+            var response = data.engine.container().sync(data.operationRef, AppDataSyncParameters())
+            waitForJob(data.engine, response)
+
+            val source = findInResult(data.engine.source().list()) {
+                it.getString("container") == data.operationRef
+            }
+            response = data.engine.source().disable(source!!.getString("reference"),
+                    SourceDisableParameters())
+            waitForJob(data.engine, response)
+        } else {
+            val response = data.engine.container().delete(data.operationRef, DeleteParameters())
+            waitForJob(data.engine, response)
+        }
+        operation.updateProgress(RemoteProgress.END, null, null)
     }
 
     override fun getRemotePath(operation: RemoteOperation, volume: String): String {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        val data = operation.data as EngineOperation
+        return "${data.sshUser}@${data.sshAddress}:data/$volume"
     }
 
     override fun getRsync(operation: RemoteOperation, src: String, dst: String, executor: CommandExecutor): RsyncExecutor {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        val data = operation.data as EngineOperation
+        return RsyncExecutor(operation.updateProgress, 8022, null,
+                data.sshKey, "$src/", "$dst/")
     }
 
     override fun pushMetadata(operation: RemoteOperation, commit: Map<String, Any>, isUpdate: Boolean) {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        // Our metadata is created at the time the snapshot is created, and can't be updated
+        if (isUpdate) {
+            throw IllegalStateException("commit metadata cannot be updated for engine remotes")
+        }
     }
 }
