@@ -1,3 +1,7 @@
+/*
+ * Copyright The Titan Project Contributors.
+ */
+
 plugins {
     kotlin("jvm")
     jacoco
@@ -6,6 +10,7 @@ plugins {
 
 }
 repositories {
+    mavenLocal()
     mavenCentral()
     jcenter()
     maven("https://dl.bintray.com/kotlin/kotlinx")
@@ -17,7 +22,7 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib"))
-    compile("io.titandata:remote-sdk:0.0.2")
+    compile("io.titandata:remote-sdk:0.0.11")
     testImplementation("io.mockk:mockk:1.9.3")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
 }

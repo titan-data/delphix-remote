@@ -1,3 +1,7 @@
+/*
+ * Copyright The Titan Project Contributors.
+ */
+
 plugins {
     kotlin("jvm")
     jacoco
@@ -5,7 +9,9 @@ plugins {
     `maven-publish`
 
 }
+
 repositories {
+    mavenLocal()
     mavenCentral()
     jcenter()
     maven("https://dl.bintray.com/kotlin/kotlinx")
@@ -17,8 +23,9 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib"))
-    compile("io.titandata:remote-sdk:0.0.8")
+    compile("io.titandata:remote-sdk:0.0.11")
     compile("com.google.code.gson:gson:2.8.6")
+    compile(project(path = ":engine", configuration = "default"))
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
     testImplementation("io.mockk:mockk:1.9.3")
 }
