@@ -280,7 +280,7 @@ class DelphixRemoteServer : RsyncRemote() {
         val sshKey: String
     )
 
-    override fun startOperation(operation: RemoteOperation) {
+    override fun syncDataStart(operation: RemoteOperation): Any? {
         val engine = connect(operation.remote, operation.parameters)
 
         val name = operation.remote["repository"] as String
@@ -310,12 +310,12 @@ class DelphixRemoteServer : RsyncRemote() {
 
         val resultParams = getParameters(engine, operationRef)
 
-        operation.data = EngineOperation(engine, operationRef, operation.remote["address"] as String,
+        return EngineOperation(engine, operationRef, operation.remote["address"] as String,
                 resultParams.getString("sshUser"), resultParams.getString("sshKey"))
     }
 
-    override fun endOperation(operation: RemoteOperation, isSuccessful: Boolean) {
-        val data = operation.data as EngineOperation
+    override fun syncDataEnd(operation: RemoteOperation, operationData: Any?, isSuccessful: Boolean) {
+        val data = operationData as EngineOperation
         operation.updateProgress(RemoteProgress.START, "Removing remote endpoint", null)
         if (operation.type == RemoteOperationType.PUSH && isSuccessful) {
             var response = data.engine.container().sync(data.operationRef, AppDataSyncParameters())
@@ -334,13 +334,13 @@ class DelphixRemoteServer : RsyncRemote() {
         operation.updateProgress(RemoteProgress.END, null, null)
     }
 
-    override fun getRemotePath(operation: RemoteOperation, volume: String): String {
-        val data = operation.data as EngineOperation
+    override fun getRemotePath(operation: RemoteOperation, operationData: Any?, volume: String): String {
+        val data = operationData as EngineOperation
         return "${data.sshUser}@${data.sshAddress}:data/$volume"
     }
 
-    override fun getRsync(operation: RemoteOperation, src: String, dst: String, executor: CommandExecutor): RsyncExecutor {
-        val data = operation.data as EngineOperation
+    override fun getRsync(operation: RemoteOperation, operationData: Any?, src: String, dst: String, executor: CommandExecutor): RsyncExecutor {
+        val data = operationData as EngineOperation
         return RsyncExecutor(operation.updateProgress, 8022, null,
                 data.sshKey, "$src/", "$dst/")
     }
